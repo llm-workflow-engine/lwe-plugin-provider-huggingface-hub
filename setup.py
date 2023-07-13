@@ -18,7 +18,7 @@ setup(
     version=version,
     author="Chad Phillips",
     author_email="chad@apartmentlines.com",
-    description="LWE plugin: Huggingface Hub Provider plugin",
+    description="LWE plugin: Hugging Face Hub Provider plugin",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/llm-workflow-engine/lwe-plugin-provider-huggingface-hub",
