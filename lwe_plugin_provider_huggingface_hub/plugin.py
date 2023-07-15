@@ -3,6 +3,9 @@ from langchain.llms import HuggingFaceHub
 from lwe.core.provider import Provider, PresetValue
 
 class ProviderHuggingfaceHub(Provider):
+    """
+    Access to Hugging Face Hub models
+    """
 
     @property
     def model_property_name(self):
