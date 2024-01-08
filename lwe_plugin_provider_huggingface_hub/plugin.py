@@ -1,4 +1,4 @@
-from langchain.llms import HuggingFaceHub
+from langchain_community.llms import HuggingFaceHub
 
 from lwe.core.provider import Provider, PresetValue
 
