@@ -1,6 +1,20 @@
-from langchain_community.llms import HuggingFaceHub
+import os
+
+from langchain_huggingface import HuggingFaceEndpoint
 
 from lwe.core.provider import Provider, PresetValue
+
+HUGGINGFACE_DEFAULT_MODEL = 'gpt2'
+
+
+class CustomHuggingFaceEndpoint(HuggingFaceEndpoint):
+
+    def __init__(self, **kwargs):
+        kwargs['huggingfacehub_api_token'] = os.getenv('HUGGINGFACEHUB_API_TOKEN')
+        if 'endpoint_url' not in kwargs:
+            kwargs['repo_id'] = HUGGINGFACE_DEFAULT_MODEL
+        super().__init__(**kwargs)
+
 
 class ProviderHuggingfaceHub(Provider):
     """
@@ -15,46 +29,49 @@ class ProviderHuggingfaceHub(Provider):
     def capabilities(self):
         return {
             'validate_models': False,
-            'models': {
-                'bert-base-uncased': {
-                    'max_tokens': 512,
-                },
-                'gpt2': {
-                    'max_tokens': 512,
-                },
-                'xlm-roberta-base': {
-                    'max_tokens': 512,
-                },
-                'roberta-base': {
-                    'max_tokens': 512,
-                },
-                'microsoft/layoutlmv3-base': {
-                    'max_tokens': 512,
-                },
-                'distilbert-base-uncased': {
-                    'max_tokens': 512,
-                },
-                't5-base': {
-                    'max_tokens': 512,
-                },
-                'xlm-roberta-large': {
-                    'max_tokens': 512,
-                },
-                'bert-base-cased': {
-                    'max_tokens': 512,
-                },
-                'google/flan-t5-xl': {
-                    'max_tokens': 512,
-                },
-            }
         }
 
     @property
     def default_model(self):
-        return 'gpt2'
+        return HUGGINGFACE_DEFAULT_MODEL
+
+    @property
+    def static_models(self):
+        return {
+            'bert-base-uncased': {
+                'max_tokens': 512,
+            },
+            'gpt2': {
+                'max_tokens': 512,
+            },
+            'xlm-roberta-base': {
+                'max_tokens': 512,
+            },
+            'roberta-base': {
+                'max_tokens': 512,
+            },
+            'microsoft/layoutlmv3-base': {
+                'max_tokens': 512,
+            },
+            'distilbert-base-uncased': {
+                'max_tokens': 512,
+            },
+            't5-base': {
+                'max_tokens': 512,
+            },
+            'xlm-roberta-large': {
+                'max_tokens': 512,
+            },
+            'bert-base-cased': {
+                'max_tokens': 512,
+            },
+            'google/flan-t5-xl': {
+                'max_tokens': 512,
+            },
+        }
 
     def llm_factory(self):
-        return HuggingFaceHub
+        return CustomHuggingFaceEndpoint
 
     def customization_config(self):
         return {
