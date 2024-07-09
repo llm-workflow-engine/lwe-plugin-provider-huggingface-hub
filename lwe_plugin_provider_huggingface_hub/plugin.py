@@ -38,34 +38,7 @@ class ProviderHuggingfaceHub(Provider):
     @property
     def static_models(self):
         return {
-            'bert-base-uncased': {
-                'max_tokens': 512,
-            },
             'gpt2': {
-                'max_tokens': 512,
-            },
-            'xlm-roberta-base': {
-                'max_tokens': 512,
-            },
-            'roberta-base': {
-                'max_tokens': 512,
-            },
-            'microsoft/layoutlmv3-base': {
-                'max_tokens': 512,
-            },
-            'distilbert-base-uncased': {
-                'max_tokens': 512,
-            },
-            't5-base': {
-                'max_tokens': 512,
-            },
-            'xlm-roberta-large': {
-                'max_tokens': 512,
-            },
-            'bert-base-cased': {
-                'max_tokens': 512,
-            },
-            'google/flan-t5-xl': {
                 'max_tokens': 512,
             },
         }
